@@ -1,19 +1,20 @@
 class TasksController < ApplicationController
   before_action :set_task, only:[:show, :edit, :update, :destroy]
+  before_action :require_user_logged_in, only: [:index, :show, :new, :create, :create, :edit, :update, :deatroy]
   
   def index
-    @tasks = Task.all
+    @tasks = current_user.task.all
   end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = cuurent.task.build 
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.task.build(task_params)
 
     if @task.save
       flash[:success] = 'Task が正常に登録されました'
@@ -50,7 +51,7 @@ class TasksController < ApplicationController
   # Strong Parameter
   
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.task.find(params[:id])
   end
   
   def task_params
