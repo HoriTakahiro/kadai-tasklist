@@ -1,6 +1,7 @@
 <h1>Sign up</h1>
 
-<%= form_with(model: @user, local: true) do |f| %>
+<%= form_with(model: @user, local: true) do |f| %> 
+  <%= render 'layouts/error_messages', model: f.object %>
   
 <div>
   <%= f.label :name, 'Name' %>
@@ -19,4 +20,6 @@
   <%= f.password_field :password_confirmation %>
 </div>
       <%= f.submit 'Sign up' %>
-  <% end %>
+<% end %>
+
+<%= link_to 'ログイン画面に戻る', login_url %>
