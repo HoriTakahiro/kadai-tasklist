@@ -4,9 +4,6 @@ class TasksController < ApplicationController
   
   def index
     @tasks = current_user.tasks.all
-    unless @tasks
-      redirect_to root_url
-    end
   end
 
   def show
@@ -14,17 +11,10 @@ class TasksController < ApplicationController
 
   def new
     @task = current_user.tasks.build 
-    unless @task
-      redirect_to root_url
-    end
   end
 
   def create
     @task = current_user.tasks.build(task_params)
-    unless @task
-      redirect_to root_url
-    end
-
     if @task.save
       flash[:success] = 'Task が正常に登録されました'
       redirect_to @task
